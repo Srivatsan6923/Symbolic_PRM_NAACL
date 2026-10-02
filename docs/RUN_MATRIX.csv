@@ -1,0 +1,136 @@
+run_id,exp,kind,system,data,format,seed,n_items,runtime,est_hours,measured_hours,priority,depends_on,status,notes
+D0,setup,data,-,-,-,-,-,CPU,3,,P0,-,todo,engine + step-level claims + invariants; shortcut validation must pass
+D1,setup,data,-,test,-,-,2000,CPU,0.5,,P0,D0,todo,1200 easy / 800 hard; ~25% held-out families
+D2,setup,data,-,dev,-,-,300,CPU,0.2,,P0,D0,todo,
+D3,setup,data,-,train corpora,-,-,60k each,CPU,1,,P0,D0,todo,"balanced, flips, triplets, no_pres, conclusion_only"
+D4,setup,data,-,medeinst,-,-,2000 pairs,CPU,1,,P1,-,todo,test split only
+D5,setup,gen,frozen policy,medqa,-,-,1273 x 8,L4/L40,3,,P1,-,todo,one candidate pool for all verifiers
+P0,pilot,api,5 models,test[:300],direct,-,300,CPU,3,,P0,D1,todo,apply GO rule; log
+T0,E4,timing,backbone,triplets,ledger2,0,200 steps,A100,0.3,,P0,D3,todo,sets est_hours for all E4 rows
+E1-closed-1,E1,eval,closed-1,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-closed-2,E1,eval,closed-2,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-closed-3,E1,eval,closed-3,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-kimi-k3,E1,eval,kimi-k3,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-glm-5.3,E1,eval,glm-5.3,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-nemotron-3-ultra,E1,eval,nemotron-3-ultra,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-nemotron-3-super,E1,eval,nemotron-3-super,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-qwen-large,E1,eval,qwen-large,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-deepseek-latest,E1,eval,deepseek-latest,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-nemotron-3-nano,E1,eval,nemotron-3-nano,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-qwen-small-local,E1,eval,qwen-small-local,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-llama-local,E1,eval,llama-local,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-med-prm,E1,eval,med-prm,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-fover-prm,E1,eval,fover-prm,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E1-generative-prm,E1,eval,generative-prm,test,direct,-,2000 (1000 if thinking),CPU/API or L4,2,,P0,P0,todo,"verify ID; record access date, reasoning effort"
+E2-m1-direct,E2,eval,selected-1,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m1-summary,E2,eval,selected-1,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m1-ledger,E2,eval,selected-1,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m1-oracle-ledger,E2,eval,selected-1,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m1-balanced-d0,E3,eval,selected-1,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-balanced-d1,E3,eval,selected-1,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-balanced-d2,E3,eval,selected-1,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-flips-d0,E3,eval,selected-1,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-flips-d1,E3,eval,selected-1,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-flips-d2,E3,eval,selected-1,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-triplets-d0,E3,eval,selected-1,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-triplets-d1,E3,eval,selected-1,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m1-triplets-d2,E3,eval,selected-1,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E2-m2-direct,E2,eval,selected-2,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m2-summary,E2,eval,selected-2,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m2-ledger,E2,eval,selected-2,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m2-oracle-ledger,E2,eval,selected-2,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m2-balanced-d0,E3,eval,selected-2,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-balanced-d1,E3,eval,selected-2,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-balanced-d2,E3,eval,selected-2,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-flips-d0,E3,eval,selected-2,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-flips-d1,E3,eval,selected-2,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-flips-d2,E3,eval,selected-2,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-triplets-d0,E3,eval,selected-2,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-triplets-d1,E3,eval,selected-2,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m2-triplets-d2,E3,eval,selected-2,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E2-m3-direct,E2,eval,selected-3,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m3-summary,E2,eval,selected-3,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m3-ledger,E2,eval,selected-3,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m3-oracle-ledger,E2,eval,selected-3,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m3-balanced-d0,E3,eval,selected-3,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-balanced-d1,E3,eval,selected-3,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-balanced-d2,E3,eval,selected-3,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-flips-d0,E3,eval,selected-3,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-flips-d1,E3,eval,selected-3,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-flips-d2,E3,eval,selected-3,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-triplets-d0,E3,eval,selected-3,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-triplets-d1,E3,eval,selected-3,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m3-triplets-d2,E3,eval,selected-3,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E2-m4-direct,E2,eval,selected-4,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m4-summary,E2,eval,selected-4,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m4-ledger,E2,eval,selected-4,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m4-oracle-ledger,E2,eval,selected-4,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m4-balanced-d0,E3,eval,selected-4,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-balanced-d1,E3,eval,selected-4,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-balanced-d2,E3,eval,selected-4,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-flips-d0,E3,eval,selected-4,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-flips-d1,E3,eval,selected-4,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-flips-d2,E3,eval,selected-4,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-triplets-d0,E3,eval,selected-4,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-triplets-d1,E3,eval,selected-4,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m4-triplets-d2,E3,eval,selected-4,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E2-m5-direct,E2,eval,selected-5,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m5-summary,E2,eval,selected-5,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m5-ledger,E2,eval,selected-5,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m5-oracle-ledger,E2,eval,selected-5,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m5-balanced-d0,E3,eval,selected-5,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-balanced-d1,E3,eval,selected-5,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-balanced-d2,E3,eval,selected-5,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-flips-d0,E3,eval,selected-5,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-flips-d1,E3,eval,selected-5,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-flips-d2,E3,eval,selected-5,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-triplets-d0,E3,eval,selected-5,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-triplets-d1,E3,eval,selected-5,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m5-triplets-d2,E3,eval,selected-5,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E2-m6-direct,E2,eval,selected-6,test[:1000],direct,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m6-summary,E2,eval,selected-6,test[:1000],summary,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m6-ledger,E2,eval,selected-6,test[:1000],ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E2-m6-oracle-ledger,E2,eval,selected-6,test[:1000],oracle-ledger,-,1000,CPU/API,1,,P1,E1,todo,models chosen by rule after E1
+E3-m6-balanced-d0,E3,eval,selected-6,test[:1000],icl8-balanced,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-balanced-d1,E3,eval,selected-6,test[:1000],icl8-balanced,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-balanced-d2,E3,eval,selected-6,test[:1000],icl8-balanced,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-flips-d0,E3,eval,selected-6,test[:1000],icl8-flips,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-flips-d1,E3,eval,selected-6,test[:1000],icl8-flips,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-flips-d2,E3,eval,selected-6,test[:1000],icl8-flips,2,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-triplets-d0,E3,eval,selected-6,test[:1000],icl8-triplets,0,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-triplets-d1,E3,eval,selected-6,test[:1000],icl8-triplets,1,1000,CPU/API,1,,P2,E1,todo,
+E3-m6-triplets-d2,E3,eval,selected-6,test[:1000],icl8-triplets,2,1000,CPU/API,1,,P2,E1,todo,
+E4-G1-s0,E4,train,backbone-4B,balanced,ledger2,0,60000,A100,2.5,,P0,T0,todo,
+E4-G1-s1,E4,train,backbone-4B,balanced,ledger2,1,60000,A100,2.5,,P1,T0,todo,
+E4-G1-s2,E4,train,backbone-4B,balanced,ledger2,2,60000,A100,2.5,,P1,T0,todo,
+E4-G2-s0,E4,train,backbone-4B,flips,ledger2,0,60000,A100,2.5,,P0,T0,todo,
+E4-G2-s1,E4,train,backbone-4B,flips,ledger2,1,60000,A100,2.5,,P1,T0,todo,
+E4-G2-s2,E4,train,backbone-4B,flips,ledger2,2,60000,A100,2.5,,P1,T0,todo,
+E4-G3-s0,E4,train,backbone-4B,triplets,ledger2,0,60000,A100,2.5,,P0,T0,todo,
+E4-G3-s1,E4,train,backbone-4B,triplets,ledger2,1,60000,A100,2.5,,P1,T0,todo,
+E4-G3-s2,E4,train,backbone-4B,triplets,ledger2,2,60000,A100,2.5,,P1,T0,todo,
+E4-G4-s0,E4,train,backbone-4B,triplets,verdict,0,60000,A100,2.5,,P0,T0,todo,
+E4-G4-s1,E4,train,backbone-4B,triplets,verdict,1,60000,A100,2.5,,P1,T0,todo,
+E4-G4-s2,E4,train,backbone-4B,triplets,verdict,2,60000,A100,2.5,,P1,T0,todo,
+E4-G5-s0,E4,train,backbone-4B,triplets,prose2,0,60000,A100,2.5,,P1,T0,todo,
+E4-G5-s1,E4,train,backbone-4B,triplets,prose2,1,60000,A100,2.5,,P2,T0,todo,
+E4-G5-s2,E4,train,backbone-4B,triplets,prose2,2,60000,A100,2.5,,P2,T0,todo,
+E4-G6-s0,E4,train,backbone-4B,triplets,ledger2+change,0,60000,A100,2.5,,P1,T0,todo,
+E4-G6-s1,E4,train,backbone-4B,triplets,ledger2+change,1,60000,A100,2.5,,P2,T0,todo,seeds 1-2 only if promotion rule passes
+E4-G6-s2,E4,train,backbone-4B,triplets,ledger2+change,2,60000,A100,2.5,,P2,T0,todo,seeds 1-2 only if promotion rule passes
+E4-G7-s0,E4,train,backbone-4B,triplets-conclusion-only,ledger2,0,60000,A100,2.5,,P1,T0,todo,
+E4-G7-s1,E4,train,backbone-4B,triplets-conclusion-only,ledger2,1,60000,A100,2.5,,P2,T0,todo,
+E4-G7-s2,E4,train,backbone-4B,triplets-conclusion-only,ledger2,2,60000,A100,2.5,,P2,T0,todo,
+E4-G8-s0,E4,train,backbone-4B,flips,verdict,0,60000,A100,2.5,,P1,T0,todo,
+E4-G8-s1,E4,train,backbone-4B,flips,verdict,1,60000,A100,2.5,,P2,T0,todo,
+E4-G8-s2,E4,train,backbone-4B,flips,verdict,2,60000,A100,2.5,,P2,T0,todo,
+E4-abl-bit-only,E4,train,backbone-4B,triplets,ledger2,0,60000,A100,2.5,,P2,E4-G3-s0,todo,bit-only
+E4-abl-judge-sees-case,E4,train,backbone-4B,triplets,ledger2,0,60000,A100,2.5,,P2,E4-G3-s0,todo,judge-sees-case
+E4-abl-ledger-no-attrs,E4,train,backbone-4B,triplets,ledger2,0,60000,A100,2.5,,P2,E4-G3-s0,todo,ledger-no-attrs
+E4-abl-no-presentation,E4,train,backbone-4B,triplets,ledger2,0,60000,A100,2.5,,P2,E4-G3-s0,todo,no-presentation
+E4-eval,E4,eval,all adapters,dev then test,-,-,300 / 2000,L4,8,,P0,E4,todo,"log-prob margins, both orders; step-level metrics"
+E5-api,E5,eval,E1 models,medeinst,direct,-,2000 pairs,CPU/API,3,,P1,D4,todo,Spearman vs E1 TA
+E5-local,E5,eval,E4 adapters + base,medeinst,per format,-,2000 pairs,L4,4,,P1,E4-eval,todo,
+E6,E6,eval,majority / med PRM / G4 / G3,medqa pool,rerank,-,1273,L4,5,,P1,"D5,E4-eval",todo,"N=1,2,4,8; oracle; swapped vignette"
+TAB,paper,analysis,-,-,-,-,-,CPU,2,,P0,all,todo,make_tables.py + update_paper.py
+PAPER,paper,writing,-,-,-,-,-,CPU,8,,P0,TAB,todo,"rewrite Sections 6-7, abstract, conclusion from measured numbers"
